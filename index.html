@@ -30,6 +30,8 @@
                     <button class="btn_startRound_first f_btn ty_big w_600 _blue">다시하기</button>
                 </div>
             </span>
+            <span class="x_layer"></span>
+            <span class="o_layer"></span>
             <div class="game_typing_view">
                 <div class="q_list">
                     
@@ -103,6 +105,9 @@
         const end_layer = document.querySelector('.end_layer');
         const btn_startRound_first = document.querySelector('.btn_startRound_first');
 
+        const x_layer = document.querySelector('.x_layer');
+        const o_layer = document.querySelector('.o_layer');
+
         /* for(let i=0;i<typeing.length;i++){
             let span = document.createElement("span");
             span.classList.add('q_text');
@@ -134,7 +139,7 @@
            
             if(wordInput.value.replace(/ /g, '') === q_list[round][step].a.replace(/ /g, '')){
                 
-                
+                ooo();
                 
                 if(score < total){
                     score++;
@@ -161,6 +166,8 @@
                    
                 }
  
+            }else{
+                xxx()
             }
             wordInput.value = '';
         }
@@ -216,19 +223,27 @@
             }
 
         }
-       
+        function ooo(){
+            o_layer.classList.add('on');
+            setTimeout(()=>{
+                o_layer.classList.remove('on')
+            },250)
+        }
        
         function xxx(){
-
+            x_layer.classList.add('on');
+            setTimeout(()=>{
+                x_layer.classList.remove('on')
+            },150)
         }
 
 
         
         function dropdown(time){
-            q_item.style.bottom = time/20+'%' ;
+            q_item.style.top = time/20+'%' ;
         }
         function q_item_reset(){
-            q_item.style.bottom = 100+'%';
+            q_item.style.top = 100+'%';
             q_item.classList.remove('end');
         }
        
