@@ -1,0 +1,206 @@
+.v_tbl {
+    width: 100%;
+    border-top: 1px solid #000;
+    table-layout: fixed;
+    &.ty_nofix {
+        table-layout: auto;
+    }
+    tr.hidden_tr {
+        display: none;
+        &.on {
+            display: table-row;
+        }
+    }
+
+    &.ty_s_th {
+        th {
+            width: 100px;
+        }
+    }
+    
+    th, td {
+        padding: 6px 10px;
+        font-size: 12px;
+        line-height: 18px;
+        height: 39px;
+    }
+    th {
+        background-color: $c_bg_grey;
+        border-bottom: 1px solid $c_line;
+        width: 160px;
+    }
+    td {
+        border-bottom: 1px solid $c_line;
+    }
+    &_toggle {
+        display: flex;
+        margin: 0 auto;
+        width: 36px;
+        height: 18px;
+        font-size: 16px;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background-color: $c_solidGrey;
+        border-radius: 0 0 5px 5px;
+        &.on {
+            i {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+
+
+
+.h_tbl {
+    &_wrap {
+        border: 1px solid $c_line;
+        border-top: 1px solid #000;
+    }
+
+    width: 100%;
+    font-size: 12px;
+    //border: 1px solid $c_line;
+    border-left: none;
+    border-collapse: collapse;
+    
+    &.ty_fixed {
+        table-layout: fixed;
+    }
+
+    thead {
+        th {
+            background-color: $c_bg_grey;
+            text-align: center;
+            padding: 5px;
+            height: 32px;
+            cursor: pointer;
+            border: 1px solid $c_line;
+            border-top: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:first-child {
+                border-left: none;
+            }
+            &:last-child {
+                border-right: none;
+            }
+            &.th_fixed {
+                position: sticky;
+                top: 0px;
+                z-index: 99;
+                
+            }
+            &.h_auto {
+                height: auto;
+            }
+        }
+    }
+
+    tfoot {
+        th {
+            background-color: $c_bg_grey;
+            text-align: center;
+            padding: 5px;
+            height: 32px;
+            cursor: pointer;
+            border: 1px solid $c_line;
+            border-bottom: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:first-child {
+                border-left: none;
+            }
+            &:last-child {
+                border-right: none;
+            }
+            &.th_fixed {
+                position: sticky;
+                bottom: 0px;
+                z-index: 99;
+            }
+            &.h_auto {
+                height: auto;
+            }
+        }
+    }
+    tbody {
+        tr:hover {
+            background-color: rgba(rgb(249, 246, 61), 0.08);
+            cursor: pointer;
+        }
+        tr.on {
+            background-color: rgba(rgb(249, 246, 61), 0.16);
+        }
+        tr.chk_on {
+            background-color: rgba($c_key, .08);
+        }
+        th {
+            background-color: $c_bg_grey;
+        }
+        td, th {
+            padding: 5px;
+            border: 1px solid $c_line;
+            max-width: 0;
+            text-align: center;
+            &.taL {
+                text-align: left;
+            }
+            &:first-child {
+                border-left: none;
+            }
+            &:last-child {
+                border-right: none;
+            }
+        }
+        tr:last-child {
+            td, th {
+                border-bottom: none;
+                
+            }
+        }
+    }
+
+    .col_sort {
+        display: inline-flex;
+        margin-left: 6px;
+        flex-direction: column;
+        vertical-align: middle;
+        
+        .btn_sort {
+            display: block;
+            &.ty_up {
+                border-bottom: 5px solid #999;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                &:hover {
+                    border-bottom-color: #000;
+                }
+                &.on {
+                    border-bottom-color: #000;
+                }
+            }
+            &.ty_down {
+                margin-top: 4px;
+                border-top: 5px solid #999;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                &:hover {
+                    border-top-color: #000;
+                }
+                &.on {
+                    border-top-color: #000;
+                }
+            }
+        }
+    }
+
+    .f_btn.ty_small {
+        height: 22px;
+        line-height: 20px;
+    }
+}

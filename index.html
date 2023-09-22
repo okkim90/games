@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME</title>
+    <link rel="stylesheet" href="./assets/css/common.min.css">
+    <link rel="stylesheet" href="./assets/css/jquery-ui.css">
+    <script src="./assets/js/jquery-3.1.1.min.js"></script>
+    <script src="./assets/js/jquery-ui.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="game_typing">
+            <div class="q_item_num"></div>
+            <span class="round_layer">
+                <div>
+                    <p><b> 개쓰레기 게임</b></p>
+                    ROUND <span class="round">1</span> 
+                    
+                    <button class="btn_startRound  f_btn ty_big _key w_400">시작!</button>
+                </div>
+            </span>
+            <span class="end_layer">
+                <div class="end_layer_inner">
+                    <h2>게임종료!</h2>
+                    <p>총 '<span class="game_typing_score">0</span>' 점을 획득했습니다.</p>
+                    <button class="f_btn ty_big w_600 _blue">저장하기</button>
+                    <button class="btn_startRound_first f_btn ty_big w_600 _blue">다시하기</button>
+                </div>
+            </span>
+            <div class="game_typing_view">
+                <div class="q_list">
+                    
+                    <span class="q_item">
+                        
+                        <div class="q_item_txt"></div>
+                    </span>
+                </div>
+            </div>
+            <div class="game_typing_bot">
+                <div class="d_flex">
+                    <p>남은시간 <span class="q_time">10</span>초</p>
+                    <p>[ <span class="game_typing_score">0</span> ] 점</p>
+                </div>
+               
+                <input type="text" class="game_typing_input f_input ty_mid w_200">
+                <button type="submit" class="game_typing_btn f_btn ty_mid _key w_60">입력</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        isPlaying = false;
+        let time = 1000;
+        let timeS = 10;
+
+        let timeInterval;
+        let timeSInterval;
+        let score = 0;
+        let step = 0;
+        let round = 0;
+        let stage = 1;
+        let total = 0;
+
+
+        const q_list = [
+            [
+                {q:'1번 문제내용문제내용 문제내용 문제내용 은?', a:'1' },
+                {q:'2번 문제내용문제내용 문제내용 문제내용 은?', a:'2' },
+                {q:'3번 문제내용문제내용 문제내용 문제내용 은?', a:'3' },
+                {q:'4번 문제내용문제내용 문제내용 문제내용 은?', a:'4' },
+                {q:'5번 문제내용문제내용 문제내용 문제내용 은?', a:'5' }
+            ],
+            [
+                {q:'1번 문제내용문제내용 문제내용 문제내용 은?', a:'11' },
+                {q:'2번 문제내용문제내용 문제내용 문제내용 은?', a:'22' },
+                {q:'3번 문제내용문제내용 문제내용 문제내용 은?', a:'33' },
+                {q:'4번 문제내용문제내용 문제내용 문제내용 은?', a:'44' },
+                {q:'5번 문제내용문제내용 문제내용 문제내용 은?', a:'55' }
+            ],
+            [
+                {q:'1번 문제내용문제내용 문제내용 문제내용 은?', a:'111' },
+                {q:'2번 문제내용문제내용 문제내용 문제내용 은?', a:'222' },
+                {q:'3번 문제내용문제내용 문제내용 문제내용 은?', a:'333' },
+                {q:'4번 문제내용문제내용 문제내용 문제내용 은?', a:'444' },
+                {q:'5번 문제내용문제내용 문제내용 문제내용 은?', a:'555' }
+            ]
+        ]
+       // console.log(q_list[0][0])
+        
+        const ty_view = document.querySelector('.q_list');
+        const wordInput = document.querySelector('.game_typing_input');
+        const wordBtn = document.querySelector('.game_typing_btn');
+        const scoreBox = document.querySelectorAll('.game_typing_score');
+        const q_item = document.querySelector('.q_item');
+        const q_item_txt = document.querySelector('.q_item_txt');
+        const q_item_num = document.querySelector('.q_item_num');
+        const q_time = document.querySelector('.q_time');
+        const round_layer = document.querySelector('.round_layer');
+        const btn_startRound = document.querySelector('.btn_startRound');
+        const round_count = document.querySelector('.round_layer .round');
+        const end_layer = document.querySelector('.end_layer');
+        const btn_startRound_first = document.querySelector('.btn_startRound_first');
+
+        /* for(let i=0;i<typeing.length;i++){
+            let span = document.createElement("span");
+            span.classList.add('q_text');
+            span.classList.add('q'+(i+1));
+            let text = document.createTextNode(typeing[i].q);
+            span.appendChild(text);
+            ty_view.insertBefore(span, ty_view.firstChild);
+        } */
+
+       // console.log(typeing.length);
+       for(let i=0;i<q_list.length;i++){
+        total += q_list[i].length
+        //return total
+       }
+       
+
+        wordBtn.addEventListener('click',()=>{
+            a_check();
+        });
+        wordInput.addEventListener('keyup',(e)=>{
+            if(e.keyCode === 13){
+                //e.preventDefault();
+                a_check()
+            }
+        });
+
+        function a_check(){
+            
+           
+            if(wordInput.value === q_list[round][step].a){
+                
+                
+                
+                if(score < total){
+                    score++;
+                    scoreBox.forEach((e)=>{
+                        e.innerText = score;
+                    })
+                   
+                }
+                if(step < q_list[round].length - 1 ){
+                    step++;
+                    
+                    clearInterval(timeInterval);
+                    setTimeout(()=>{
+                        run(round, step);
+                    },500);
+                }else{
+                    clearInterval(timeInterval);
+                    setTimeout(()=>{
+                        stop();
+                        round++;
+                        step=0;
+                        nextRound(round)
+                    },500)
+                   
+                }
+ 
+            }
+            wordInput.value = '';
+        }
+
+        
+        btn_startRound.addEventListener('click',function(){
+            run(round, 0);
+        });
+
+        btn_startRound_first.addEventListener('click',function(){
+            round = 0;
+            step = 0;
+            score = 0;
+            scoreBox.forEach((e)=>{
+                e.innerText = score;
+            })
+            run(round, step);
+            
+        });
+
+        function run(round, step){
+            
+            stop();
+            time = 1000;
+            isPlaying = true;
+            console.log(round, step);
+            
+            if(isPlaying){
+                timeInterval = setInterval(countDown, 10);
+            
+                round_layer.classList.add('start');
+                end_layer.classList.remove('on');
+                q_item_txt.innerText = q_list[round][step].q;
+                q_item_num.innerText = 'ROUND'+(round+1)+' - '+(step+1)+'번 문제';
+            }
+
+        }
+
+        function stop(){
+            q_item_reset();
+            isPlaying = false;
+            clearInterval(timeInterval);
+          
+        }
+
+        function nextRound(round){
+            if (round < q_list.length){
+                step = 0;
+                round_layer.classList.remove('start');
+                round_count.innerText = round + 1;
+            }else{
+                end_layer.classList.add('on');
+            }
+
+        }
+       
+       
+
+        
+        function dropdown(time){
+            q_item.style.bottom = time/10+'%';
+        }
+        function q_item_reset(){
+            q_item.style.bottom = 100+'%';
+            q_item.classList.remove('end');
+        }
+       
+        function countDown(){
+            if(time > 0){
+                q_item.classList.remove('end');
+                time--;
+                q_time.innerText = Math.ceil(time/100);
+                dropdown(time)
+            }else {
+                
+                if(step < q_list[round].length - 1){
+                    step++;
+                    run(round, step)
+                   
+                }else{
+                    q_item.classList.add('end');
+                    stop();
+                    round++;
+                    nextRound(round);
+                }
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>
