@@ -80,7 +80,7 @@
                 {q:'이것은 음식이 아닌 햇빛에 노출되어 주로 생성되는 스테로이드 호르몬으로 부족할 경우 피부암을 유발할 수도 있다고 합니다. 무엇일까요?', a:['비타민D','비타민d'] },
                 {q:'소송에 있어서 원고의 소에 의한 청구나 상소인의 상소에 의한 불복신청을 이유가 없다고 하여 배척하는 판결 또는 결정은?', a:['기각'] },
                 {q:'인도에서 직업에 따라 사람들을 구별하는 제도로 크게 네 개의 신분으로 나누는 이 신분제도는?', a:['카스트 제도','카스트'] },
-                {q:'영국과 탈퇴를 뜻하는 합성어로 2016년 6월에 진행되었으며 영국의 유럽연합(EU) 탈퇴를 뜻하는 이 말은?', a:['브렉시트'] }
+                {q:'영국과 탈퇴를 뜻하는 합성어로 2016년 6월에 진행되었으며 영국의 유럽연합(EU) 탈퇴를 뜻하는 이 말은?', a:['브렉시트','브랙시트'] }
             ],
             [
                 {q:'공공의 이익은 되지만 위험시설 등이 자기지역에 유치되는것을 반대하는 지역 이기주의현상은?', a:['님비 현상', '님비'] },
@@ -164,7 +164,7 @@
                     clearInterval(timeInterval);
                     setTimeout(()=>{
                         run(round, step);
-                    },500);
+                    },600);
                 }else{
                     clearInterval(timeInterval);
                     setTimeout(()=>{
@@ -172,7 +172,7 @@
                         round++;
                         step=0;
                         nextRound(round)
-                    },500)
+                    },600)
                    
                 }
  
@@ -237,14 +237,14 @@
             o_layer.classList.add('on');
             setTimeout(()=>{
                 o_layer.classList.remove('on')
-            },250)
+            },300)
         }
        
         function xxx(){
             x_layer.classList.add('on');
             setTimeout(()=>{
                 x_layer.classList.remove('on')
-            },150)
+            },300)
         }
 
         function pass(){
@@ -255,7 +255,7 @@
                 clearInterval(timeInterval);
                 setTimeout(()=>{
                     run(round, step);
-                },500);
+                },600);
             }else{
                 clearInterval(timeInterval);
                 setTimeout(()=>{
@@ -263,7 +263,7 @@
                     round++;
                     step=0;
                     nextRound(round)
-                },500)
+                },600)
                
             }
         }
@@ -287,14 +287,20 @@
             }else {
                 xxx();
                 if(step < q_list[round].length - 1){
+                    stop();
                     step++;
-                    run(round, step)
+                    setTimeout(()=>{
+                        run(round, step)
+                    },600)
+                    
                    
                 }else{
                     q_item.classList.add('end');
                     stop();
                     round++;
-                    nextRound(round);
+                    setTimeout(()=>{
+                        nextRound(round)
+                    },600)
                 }
             }
         }
