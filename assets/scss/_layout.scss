@@ -987,6 +987,7 @@
 
 .game_typing {
     position: relative;
+    max-width: 100%;
     width: 600px;
     height: 100vh;
     margin: 0 auto;
@@ -1018,7 +1019,7 @@
             width: 100%;
             text-align: center;
             //transition: bottom .2s ease-in-out;
-            font-size: 30px;
+            font-size: 3.2vh;
             transition: opacity .2s ease-in-out;
             padding: 0 20px;
             box-sizing: border-box;
@@ -1155,13 +1156,13 @@
         align-items: center;
         justify-content: center;
         color: #fff;
-        font-size: 100px;
+        font-size: 50vh;
         font-weight: bold;
         &.on {
             display: flex;
         }
         &::before {
-            content: '땡이다!';
+            content: 'X';
         }
     }
     .o_layer {
@@ -1177,13 +1178,13 @@
         align-items: center;
         justify-content: center;
         color: #fff;
-        font-size: 100px;
+        font-size: 50vh;
         font-weight: bold;
         &.on {
             display: flex;
         }
         &::before {
-            content: '정답이다!';
+            content: 'O';
         }
     }
 }
